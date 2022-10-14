@@ -1,0 +1,88 @@
+{% extends 'home_app/main.html' %}
+{% block content %}
+{% include 'home_app/navbar.html' %}
+<!--all posts-->
+<section class="p-2 pt-lg-2 text-center text-sm-start">
+    <div class="container">
+        <div class="row g-5">
+            <div class="col-sm-9 p-2" data-aos="fade-up" data-aos-anchor-placement="top-center" data-aos-delay="100">
+                {% for post in p_posts %} <!--it is place here-->
+                {% if forloop.counter|divisibleby:2 %} <!--odd or even-->
+                <div class="row">
+                    <div class="col-sm-6 ms-auto">
+                        <div class="card mb-4 border-secondary float-right">
+                            <div class="card-body fst-italic description ">
+                                {{ post.content |truncatechars:1000 |safe }}
+                                <p class="fst-italic fw-bold text-success">{{ post.Testimony_Name }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% else %}
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="card mb-4 border-secondary float-right">
+                            <div class="card-body fst-italic description ">
+                                {{ post.content |truncatechars:1000 |safe }}
+                                <p class="fst-italic fw-bold text-success">{{ post.Testimony_Name }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
+                {% endfor %}
+            </div>
+            <!--side bar-->
+            <div class="col-sm-3 p-2">
+                <div class="position-sticky" style="top: 3rem;">
+                    <div class="p-2 mb-3 rounded">       
+                        <h4 class="text-capitalize">necesitas <span class="text-success">ayuda?</span></h4>
+                        <p class="my-3">
+                            <span class="text-success fs-4">E</span>stá intentando superar problemas relacionados con un trauma, adicción, ansiedad o lidiando con importantes cambios en su vida? 
+                            Llega un momento en que es necesaria la ayuda de un profesional acreditado para hacer frente a muchos de los desafíos de la vida. 
+                            Soy una <span class="text-success fw-bold">Psicóloga</span> con Diplomado en Evaluación e Intervención de Trastornos Psicológicos y Problemas Emocionales.
+                        </p>
+                        <a href="https://docs.google.com/forms/d/e/1FAIpQLSeIb1SY4PvKbhjEuN_5RM2x6HcsmUE8caC1KJMjZPAYgCQgCg/viewform" class="btn btn-outline-success mx-1" target="blank">Reserva Tu Cita</a>
+                        <a href="https://www.instagram.com/_hablarsana/" target="blank" class="mx-1">
+                        <img src="/static/home_app/images/instagram.svg" alt="Instagram" width="30" height="30">
+                        </a>   
+                    </div>
+                </div>
+            </div>        
+        </div>
+        <!--Pagination-->
+        <hr>
+        <nav aria-label="Hablar Sana navigation">
+            <ul class="pagination justify-content-center">
+                {% if p_posts.has_previous %}
+                <li class="page-item">
+                    <a class="btn btn-outline-success mx-2" href="?page=1" tabindex="-1">First</a>
+                </li>
+                <li class="page-item">
+                    <a class="btn btn-outline-success mx-2" href="?page={{ p_posts.previous_page_number }}" tabindex="-1">Previous</a>
+                </li>
+                {% endif %}
+                {% for num in p_posts.paginator.page_range %}
+                    {% if p_posts.number == num %}
+                    <li class="page-item">
+                        <a class="btn btn-outline-success active mx-2" href="?page={{ num }}">{{ num }}</a>
+                    </li>
+                    {% elif num > p_posts.number|add:'-3' and num < p_posts.number|add:'3' %}
+                    <li class="page-item">
+                        <a class="btn btn-outline-success mx-2" href="?page={{ num }}">{{ num }}</a>
+                    </li>
+                    {% endif %}
+                {% endfor %}
+                {% if p_posts.has_next %}
+                <li class="page-item">
+                    <a class="btn btn-outline-success mx-2" href="?page={{ p_posts.next_page_number }}">Next</a>
+                </li>
+                <li class="page-item">
+                    <a class="btn btn-outline-success mx-2" href="?page={{ p_posts.paginator.num_pages }}">Last</a>
+                </li>
+                {% endif %}
+            </ul>
+        </nav>
+    </div>
+</section>
+{% endblock content %}

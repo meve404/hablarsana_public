@@ -1,0 +1,38 @@
+<nav class="navbar navbar-expand-lg bg-light navbar-light py-1 fixed-top" style="--bs-bg-opacity: .9;">
+    <div class="container">
+        <a href="{% url 'home-app' %}" class="navbar-brand"> <!--<img src="/static/home_app/images/logo.jpeg" alt="logo" width="38" height="38">-->
+            <span class="fw-light fst-italic">Hablar</span> <span class="text-success fw-bold fst-italic">Sana</span> </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navmenu">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navmenu">
+            <ul class="navbar-nav ms-auto">
+                {% if nav_pro == False %}
+                    <li class="nav-item">
+                        <a href="#therapy_method" class="nav-link">Metodo de Terapia</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#testi" class="nav-link">Testimonios</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#FAQ" class="nav-link">Preguntas Frecuentes</a>
+                    </li>
+                {% else %}
+                    <li class="nav-item">
+                        <a href="{% url 'home-app' %}" class="nav-link">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{% url 'testimonies' %}" class="nav-link">Testimonios</a>
+                    </li>
+                {% endif %}
+                <li class="nav-item">
+                    <a href="{% url 'professional-background' %}" class="nav-link">Formación Académica</a>
+                </li>
+                <li class="nav-item">
+                    <a href="{% url 'home-blog' %}" class="nav-link">Blog Hablar Sana</a>
+                </li>
+            </ul>
+        </div>        
+    </div>
+</nav>

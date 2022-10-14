@@ -1,0 +1,145 @@
+{% extends 'home_app/main.html' %}
+{% block content %}
+{% include 'home_app/navbar.html' %}
+
+<section class="p-4 pt-lg-4 text-center text-sm-start">
+    <div class="container" data-aos="fade-up" data-aos-anchor-placement="top-center" data-aos-delay="150"> <!--aos-->
+        <div class="d-sm-flex align-items-center justify-content-between">
+            <div class="fst-italic">
+                <h1 class="text-capitalize">necesitas <span class="text-success">ayuda?</span></h1>
+                <p class="lead">
+                    <span class="text-success fs-1">E</span>stá intentando superar problemas relacionados con un trauma, adicción, ansiedad o lidiando con importantes cambios en su vida? 
+                    Llega un momento en que es necesaria la ayuda de un profesional acreditado para hacer frente a muchos de los desafíos de la vida. 
+                    Soy una <span class="text-success fw-bold">Psicóloga</span> con Diplomado en Evaluación e Intervención de Trastornos Psicológicos y Problemas Emocionales.
+                </p>
+                <p class="lead d-none d-sm-block">
+                    <span class="text-success fs-1">E</span>s cierto que la vida puede llegar a ser abrumadora e incluso agotadora, pero existen profesionales que pueden guiarle a superar 
+                    cualquier obstáculo que se presente. Mi <span class="text-success fw-bold">objetivo</span> es ayudarlo a que tenga un conocimiento más profundo de sí mismo y enfrente mejor 
+                    los cambios.
+                </p>
+                <p class="lead">
+                    <span class="text-success fs-1">H</span>ablar de lo que más duele, <span class="text-success fw-bold">sana</span> el corazón y la mente.
+                </p> 
+                <a href="https://docs.google.com/forms/d/e/1FAIpQLSeIb1SY4PvKbhjEuN_5RM2x6HcsmUE8caC1KJMjZPAYgCQgCg/viewform" class="btn btn-outline-success mx-1" target="blank">Reserva Tu Cita</a>
+                <a href="https://www.instagram.com/_hablarsana/" target="blank" class="mx-1">
+                    <img src="/static/home_app/images/instagram.svg" alt="Instagram" width="30" height="30">
+                </a>      
+                
+            </div>
+            <img class="img-fluid d-none d-sm-block img-thumbnail" src="/static/home_app/images/Psicologa_ximena.jpeg" width="400" height="400">
+        </div>
+    </div>
+</section>
+
+<!--Metodo Terapia-->
+<section class="p-4 text-center text-sm-end" id="therapy_method">
+    <div class="container" data-aos="fade-up" data-aos-anchor-placement="top-center" data-aos-delay="100"> <!--aos-->
+        <div class="d-sm-flex align-items-center justify-content-between">
+            <img class="img-fluid opacity-80 img-thumbnail my-4" src="/static/home_app/images/img_method.jpg" width="450" height="450">
+            <div class="fst-italic">
+                <h1 class="text-capitalize">Metodo de <span class="text-success">Terapia</span></h1>
+                <p class="lead my-4">
+                    <span class="text-success fs-1">U</span>tilizo métodos de psicología <span class="text-success fw-bold">cognitivo conductual</span> muy efectivos para inducir el autoconocimiento de mis pacientes y animarlos a 
+                    adoptar nuevas actitudes y sentimientos hacia la vida. Es esencial tener en cuenta que la terapia no es una píldora mágica o una solución rápida. 
+                </p>
+                <p class="lead d-none d-sm-block">
+                    <span class="text-success fs-1">L</span>a terapia es un proceso de curación que requiere tanto la participación y esfuerzo del paciente como la del profesional. 
+                    En cualquier caso, hacer cambios pequeños frente a actitudes derrotistas y saber lidiar con sentimientos de <span class="text-success fw-bold">tristeza, miedo y dolor</span>
+                     puede traer resultados positivos. 
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!--Testimonies-->
+<section class="p-4 text-center text-sm-end" id="testi">
+  <div class="container" data-aos="fade-up" data-aos-anchor-placement="top-center" data-aos-delay="100"> <!--aos-->
+    {% for post in testi %} <!--it is place here-->
+      {% if forloop.counter|divisibleby:2 %} <!--odd or even-->
+                <div class="row">
+                    <div class="col-sm-6 ms-auto">
+                        <div class="card mb-4 border-secondary float-right">
+                            <div class="card-body fst-italic description ">
+                                {{ post.content |truncatechars:1000 |safe }}
+                                <a href="{% url 'testimonies' %}" class="text-success text-decoration-none">
+                                  <p class="fst-italic fw-bold">{{ post.Testimony_Name }}</p>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% else %}
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="card mb-4 border-secondary float-right">
+                            <div class="card-body fst-italic description ">
+                                {{ post.content |truncatechars:1000 |safe }}
+                                <a href="{% url 'testimonies' %}" class="text-success text-decoration-none">
+                                  <p class="fst-italic fw-bold">{{ post.Testimony_Name }}</p>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
+    {% endfor %}
+  </div>
+</section>
+
+<!--FAQ-->
+<section class="bg-light p-4 text-center text-sm-start" id="FAQ">
+    <div class="container" data-aos="fade-up" data-aos-anchor-placement="top-center" data-aos-delay="80"> <!--aos-->
+        <div class="fst-italic">
+            <h1 class="text-capitalize">Preguntas <span class="text-success">Frecuentes</span></h1>
+            <div class="accordion accordion-flush" id="FAQA">
+                <!--Item 1-->
+                <div class="accordion-item">
+                  <h2 class="accordion-header">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#question-one">
+                        ¿Qué tipo de terapia dan?
+                    </button>
+                  </h2>
+                  <div id="question-one" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#FAQA">
+                    <div class="accordion-body"><span class="text-success fw-bold">Terapia</span> individual, de pareja y familiar.</div>
+                  </div>
+                </div>
+                <!--Item 2-->
+                <div class="accordion-item">
+                  <h2 class="accordion-header">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#question-two">
+                        ¿Las sesiones cuanto tiempo duran?
+                    </button>
+                  </h2>
+                  <div id="question-two" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo" data-bs-parent="#FAQA">
+                    <div class="accordion-body"><span class="text-success fw-bold">Una</span> hora y media.</div>
+                  </div>
+                </div>
+                <!--Item 3-->
+                <div class="accordion-item">
+                  <h2 class="accordion-header">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#question-three">
+                        ¿Las sesiones son presenciales u online? 
+                    </button>
+                  </h2>
+                  <div id="question-three" class="accordion-collapse collapse" aria-labelledby="flush-headingThree" data-bs-parent="#FAQA">
+                    <div class="accordion-body"><span class="text-success fw-bold">Se </span>manejan por vía online.</div>   
+                  </div>
+                </div>
+                <!--Item 4-->
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#question-four">
+                        ¿Hace cuánto tiempo llevas dando terapias? 
+                      </button>
+                    </h2>
+                    <div id="question-four" class="accordion-collapse collapse" aria-labelledby="flush-headingFour" data-bs-parent="#FAQA">
+                      <div class="accordion-body"><span class="text-success fw-bold">Más</span> de tres años, pero con hablar sana específicamente un año.</div>   
+                    </div>
+                  </div>
+              </div>             
+        </div>        
+    </div>
+</section>
+
+{% endblock content %}
